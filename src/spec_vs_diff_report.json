@@ -1,58 +1,51 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T13:41:05.595Z",
-  "summary": "Implemented an /admin route with an Internet Identity login gate and admin-only access, added frontend hooks to fetch/update backend-stored page content with fallback defaults, and wired Home + Admissions/Footer contact fields to backend content. Backend gained page content storage and admin-guarded update methods. However, the diff shows a prohibited modification to an immutable frontend hook path and introduces several unrequested access-control/token utilities and backend methods.",
+  "generatedAt": "2026-02-15T14:31:02.455Z",
+  "summary": "REQ-20 is only partially implemented: backend now initializes a default \"contact\" page and adds a migration, but the stored fields do not match the required header/body/footer mapping (address/phone/email). REQ-19 appears implemented in the footer (address/phone/email shown with tel:/mailto: links), but the diff for the Admissions page is truncated so the presence of the Address/Phone lines in the Contact Information card cannot be fully verified from the provided evidence. Additionally, adding backend/migration.mo conflicts with the constraint that all backend logic must remain in backend/main.mo.",
   "missing_requirements": [
     {
-      "id": "REQ-11",
-      "requirement": "There is a way to establish/maintain at least one admin principal (e.g., initial admin set on first use and/or admin list management restricted to admins).",
-      "reason": "backend/main.mo shows admin permission checks via AccessControl/MixinAuthorization, but the diff does not show any explicit method to add an initial admin or manage the admin list (e.g., addAdmin/removeAdmin) or describe a first-use bootstrap mechanism within main.mo itself.",
+      "id": "REQ-20",
+      "requirement": "Default stored contact page must contain non-empty values for header (address), body (phone), and footer (email) matching the frontend default placeholders.",
+      "reason": "The default contact page in backend stores labeled/combined values instead of storing address/phone/email separately in header/body/footer. body contains both phone and email, and footer contains a non-email help sentence.",
       "evidence": [
-        "backend/main.mo"
+        "backend/main.mo",
+        "backend/migration.mo"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "requirement": "On /admissions, the Contact Information card shows Address and Phone lines sourced from useContactContent() and does not hide them.",
+      "reason": "Admissions page diff is truncated before the contact card rendering; although it destructures { address, phone, email } from useContactContent(), the provided snippet does not include evidence that Address and Phone lines are actually rendered in the Contact Information card.",
+      "evidence": [
+        "frontend/src/pages/AdmissionsCoachingPage.tsx (truncated)"
       ]
     }
   ],
   "hallucinated_features": [
     {
-      "description": "Edited an explicitly immutable file path (frontend/src/hooks/useActor.ts) to add actor initialization logic and secret-token based access-control initialization.",
-      "reason": "BuildRequest constraints state not to edit frontend/src/hooks/useActor.ts; diff modifies it and adds unrequested token bootstrap behavior (caffeineAdminToken).",
+      "description": "Introduced a separate backend migration module/file and wired it into the actor via (with migration = Migration.run).",
+      "reason": "BuildRequest constraints specify the backend must remain a single Motoko actor with all logic in backend/main.mo; adding backend/migration.mo is additional backend logic outside main.mo and was not requested as a feature deliverable.",
       "evidence": [
-        "frontend/src/hooks/useActor.ts"
-      ]
-    },
-    {
-      "description": "Introduced a secret URL/session parameter utility module for persisting URL parameters and removing them from hash (admin token/session helpers).",
-      "reason": "Not requested by any REQ; also suggests secret-token handling beyond the stated Internet Identity-only authentication non-goal.",
-      "evidence": [
-        "frontend/src/utils/urlParams.ts",
-        "frontend/src/hooks/useActor.ts"
-      ]
-    },
-    {
-      "description": "Added backend methods beyond requested public read + admin write: removePage, getAllPages (admin-only), and getPages (batch read).",
-      "reason": "REQ-11 only asked for a public query to fetch the current site content model and an admin-restricted update method; these extra endpoints were not requested.",
-      "evidence": [
+        "backend/migration.mo",
         "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Added heuristic validation rules to suppress clickable mailto/tel links when strings contain placeholder-like patterns (e.g., email includes '[' or phone includes 'XXX').",
+      "reason": "REQ-19 only requires making phone/email clickable when non-empty; placeholder-pattern detection was not requested.",
+      "evidence": [
+        "frontend/src/components/layout/SiteFooter.tsx"
       ]
     }
   ],
-  "confidence": 0.66,
+  "confidence": 0.74,
   "changed_files": [
     "backend/main.mo",
+    "backend/migration.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/App.tsx",
-    "frontend/src/components/Admin/AdminAccessGate.tsx",
-    "frontend/src/components/Admin/contentDefaults.ts",
     "frontend/src/components/layout/SiteFooter.tsx",
-    "frontend/src/components/layout/SiteHeader.tsx",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useAuthz.ts",
-    "frontend/src/hooks/useSiteContent.ts",
-    "frontend/src/pages/AdminPage.tsx",
     "frontend/src/pages/AdmissionsCoachingPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
-    "frontend/src/utils/urlParams.ts",
     "project_state.json"
   ]
 }

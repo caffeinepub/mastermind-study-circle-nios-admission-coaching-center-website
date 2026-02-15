@@ -1,12 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Add a protected in-website Admin page that lets authorized users log in with Internet Identity and edit selected site text content stored in the backend.
+**Goal:** Prominently display the institute’s phone number and physical address (in addition to email) in public-facing contact areas, and ensure default contact data exists on fresh deployments.
 
 **Planned changes:**
-- Create a new protected frontend route `/admin` that prompts for Internet Identity login when logged out and shows a basic editing panel when logged in.
-- Add backend support in `backend/main.mo` for a site content model with a public read method and an admin-restricted update method, including a way to establish/maintain at least one admin principal.
-- Wire public pages to read editable text fields from the backend with sensible fallback defaults matching current hardcoded copy (at minimum: Home hero headline/subheadline; Admissions/Contact address, phone, email used on the Admissions page and site footer).
-- Add an Admin navigation link that only appears when the user is authenticated (optionally only when authorized), without breaking existing desktop/mobile navigation.
+- Update the Admissions & Contact page contact card to always show Address and Phone values from the existing editable contact content (pageId: "contact"), and render phone/email as clickable tel:/mailto: links when present.
+- Update the global footer Contact section to display Phone and Address alongside Email, using the same values as the Admissions & Contact page.
+- Initialize a default "contact" page in backend content storage so getPage("contact") returns non-null content with non-empty address (header), phone (body), and email (footer) values matching the current frontend defaults.
 
-**User-visible outcome:** Visitors can browse the site normally without login; authenticated admins can go to `/admin`, edit key homepage and contact details, save changes, and see updates reflected on the public pages after refresh.
+**User-visible outcome:** Visitors see address, phone, and email consistently on the Admissions & Contact page and in the footer, with phone and email clickable; fresh deployments show these contact details without requiring an admin to save first.

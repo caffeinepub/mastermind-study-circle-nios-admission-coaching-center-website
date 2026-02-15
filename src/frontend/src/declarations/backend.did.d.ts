@@ -16,6 +16,7 @@ export interface PageContent {
   'footer' : string,
   'header' : string,
 }
+export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
@@ -23,12 +24,15 @@ export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'getAllPages' : ActorMethod<[], Array<[string, PageContent]>>,
+  'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getHomePage' : ActorMethod<[], PageContent>,
   'getPage' : ActorMethod<[string], [] | [PageContent]>,
   'getPages' : ActorMethod<[Array<string>], Array<[string, PageContent]>>,
+  'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'removePage' : ActorMethod<[string], boolean>,
+  'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
   'updatePage' : ActorMethod<[string, PageContent], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;

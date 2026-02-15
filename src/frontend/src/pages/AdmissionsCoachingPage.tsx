@@ -262,14 +262,32 @@ export default function AdmissionsCoachingPage() {
                     <Phone className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Phone</p>
-                      <p className="text-sm text-muted-foreground">{phone}</p>
+                      {phone && !phone.includes('[') && !phone.includes('XXX') ? (
+                        <a 
+                          href={`tel:${phone.replace(/\s/g, '')}`}
+                          className="text-sm text-primary hover:underline"
+                        >
+                          {phone}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{phone}</p>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Mail className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Email</p>
-                      <p className="text-sm text-muted-foreground">{email}</p>
+                      {email && !email.includes('[') && email.includes('@') ? (
+                        <a 
+                          href={`mailto:${email}`}
+                          className="text-sm text-primary hover:underline"
+                        >
+                          {email}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{email}</p>
+                      )}
                     </div>
                   </div>
                 </CardContent>

@@ -7,6 +7,9 @@ export interface None {
     __kind__: "None";
 }
 export type Option<T> = Some<T> | None;
+export interface UserProfile {
+    name: string;
+}
 export interface PageContent {
     title: string;
     body: string;
@@ -21,11 +24,14 @@ export enum UserRole {
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     getAllPages(): Promise<Array<[string, PageContent]>>;
+    getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
     getHomePage(): Promise<PageContent>;
     getPage(pageId: string): Promise<PageContent | null>;
     getPages(pageIds: Array<string>): Promise<Array<[string, PageContent]>>;
+    getUserProfile(user: Principal): Promise<UserProfile | null>;
     isCallerAdmin(): Promise<boolean>;
     removePage(pageId: string): Promise<boolean>;
+    saveCallerUserProfile(profile: UserProfile): Promise<void>;
     updatePage(pageId: string, content: PageContent): Promise<void>;
 }

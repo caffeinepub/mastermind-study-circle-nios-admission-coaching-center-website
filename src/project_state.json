@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 7,
+  "projectStateVersion": 13,
   "summary": "Website project for the institute “Mastermind Study Circle” (admission & coaching center) for NIOS, requiring at least five pages and informational content about vision, coping with failure, NIOS support, and NIOS streams/subjects (sourced from nios.ac.in). Visual theme to use blue and grey. Add an in-website admin page for editing site content.",
   "architectural_notes": [
     "Site content for NIOS streams/subjects should be sourced from nios.ac.in.",
@@ -8,7 +8,10 @@
     "Visual theme palette should use blue and grey (overrides prior preference to avoid blue/purple primaries).",
     "User requires an admin page inside the website for editing content (not just edits via chat interface)."
   ],
-  "known_issues": [],
+  "known_issues": [
+    "Home page displays unwanted default text/label: \"this is a learning experiment site\"; user requests removal.",
+    "Home page displays an incorrect bold hero/heading message about technology/innovation (\"Where ideas become reality. Explore cutting-edge technology and innovation.\"); user requests replacing it with education/vision-focused text."
+  ],
   "isFixRequest": false,
   "existing_features": [
     {
@@ -106,6 +109,22 @@
         "REQ-13"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-home-page-hero-text-so-the-bold-headline-and-supporting-text-are-education-and-vision-focused-for-mastermind-study-circle-and-remove-the-current-technology-innovation-tagline-from-the-home-page",
+      "title": "Update the Home page hero text so the bold headline and supporting text are education- and vision-focused for Mastermind Study Circle, and remove the current technology/innovation tagline from the Home page.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-website-prominently-displays-the-institute-phone-number-and-physical-address-in-addition-to-email-in-public-facing-contact-areas-using-the-existing-editable-contact-content-pageid-contact-specifically-the-admissions-contact-page-contact-card-and-the-global-footer-must-show-phone-and-address-values-not-omit-them-and-render-phone-email-as-clickable-links-tel-mailto-when-non-empty",
+      "title": "Ensure the website prominently displays the institute phone number and physical address (in addition to email) in public-facing contact areas using the existing editable contact content (pageId: \"contact\"). Specifically, the Admissions & Contact page contact card and the global footer must show phone and address values (not omit them) and render phone/email as clickable links (tel: / mailto:) when non-empty.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -126,6 +145,58 @@
       "summary": "Implement backend support for editable site content in the single Motoko actor (backend/main.mo), including read access for the public site and write access restricted to authorized admin principals.",
       "reqIds": [
         "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Remove the unwanted default Home page text \"This is a learning experiment site.\" so it no longer appears anywhere on the public Home page.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "If the canister has already been deployed with existing stored Home page content containing the unwanted text, add an upgrade-safe migration that updates the stored Home page content to a non-experimental, institute-appropriate message (in English) so the Home page stays clean after upgrade.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Update the Home page bold hero/heading text by removing \"Where ideas become reality. Explore cutting-edge technology and innovation.\" and replacing it with institute-appropriate messaging focused on education and the institute’s vision.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Update the backend default stored Home page content so fresh deployments (and empty state) no longer default to \"Home Page\" and the technology/innovation body text, and instead default to education- and vision-focused English copy appropriate for Mastermind Study Circle.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Add/adjust an upgrade-safe migration so that if existing canister state contains the legacy Home page header/body values (e.g., header \"Home Page\" and/or body \"Where ideas become reality. Explore cutting-edge technology and innovation.\"), the stored values are replaced with the new education- and vision-focused English copy during upgrade; otherwise preserve any user-customized Home page content.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Add institute phone number and physical address details to the website (e.g., in the Contact section and/or footer) instead of placeholders.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Initialize a default \"contact\" page in backend content storage so phone/address/email are consistently available via getPage(\"contact\") without requiring an admin save first. Use the existing frontend defaults (address, phone, email) as the initial values stored for this page.",
+      "reqIds": [
+        "REQ-20"
       ],
       "status": "pending"
     }

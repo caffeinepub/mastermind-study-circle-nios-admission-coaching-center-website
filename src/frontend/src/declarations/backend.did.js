@@ -19,6 +19,7 @@ export const PageContent = IDL.Record({
   'footer' : IDL.Text,
   'header' : IDL.Text,
 });
+export const UserProfile = IDL.Record({ 'name' : IDL.Text });
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
@@ -28,6 +29,7 @@ export const idlService = IDL.Service({
       [IDL.Vec(IDL.Tuple(IDL.Text, PageContent))],
       ['query'],
     ),
+  'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getHomePage' : IDL.Func([], [PageContent], ['query']),
   'getPage' : IDL.Func([IDL.Text], [IDL.Opt(PageContent)], ['query']),
@@ -36,8 +38,14 @@ export const idlService = IDL.Service({
       [IDL.Vec(IDL.Tuple(IDL.Text, PageContent))],
       ['query'],
     ),
+  'getUserProfile' : IDL.Func(
+      [IDL.Principal],
+      [IDL.Opt(UserProfile)],
+      ['query'],
+    ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'removePage' : IDL.Func([IDL.Text], [IDL.Bool], []),
+  'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
   'updatePage' : IDL.Func([IDL.Text, PageContent], [], []),
 });
 
@@ -55,6 +63,7 @@ export const idlFactory = ({ IDL }) => {
     'footer' : IDL.Text,
     'header' : IDL.Text,
   });
+  const UserProfile = IDL.Record({ 'name' : IDL.Text });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
@@ -64,6 +73,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, PageContent))],
         ['query'],
       ),
+    'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getHomePage' : IDL.Func([], [PageContent], ['query']),
     'getPage' : IDL.Func([IDL.Text], [IDL.Opt(PageContent)], ['query']),
@@ -72,8 +82,14 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Vec(IDL.Tuple(IDL.Text, PageContent))],
         ['query'],
       ),
+    'getUserProfile' : IDL.Func(
+        [IDL.Principal],
+        [IDL.Opt(UserProfile)],
+        ['query'],
+      ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'removePage' : IDL.Func([IDL.Text], [IDL.Bool], []),
+    'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
     'updatePage' : IDL.Func([IDL.Text, PageContent], [], []),
   });
 };

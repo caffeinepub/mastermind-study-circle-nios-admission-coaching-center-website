@@ -1,106 +1,58 @@
 {
   "kind": "build_request",
-  "title": "Add in-website Admin page to edit site content",
+  "title": "Add institute phone number and address to public site contact areas",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-10",
-      "text": "Create a new protected Admin page at route \"/admin\" that provides an in-website editing panel for Mastermind Study Circle content, using Internet Identity login for access.",
+      "id": "REQ-19",
+      "text": "Ensure the website prominently displays the institute phone number and physical address (in addition to email) in public-facing contact areas using the existing editable contact content (pageId: \"contact\"). Specifically, the Admissions & Contact page contact card and the global footer must show phone and address values (not omit them) and render phone/email as clickable links (tel: / mailto:) when non-empty.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "recent-messages"
+          "msg-1"
         ],
         "quotes": [
-          "yes i need admin page"
+          "add phone and address"
         ]
       },
       "acceptanceCriteria": [
-        "Navigating to /admin shows an Admin screen.",
-        "If the visitor is not authenticated with Internet Identity, the page shows a clear prompt/button to log in.",
-        "After successful login, the Admin screen is accessible and shows editing controls (not just a blank page).",
-        "The existing public pages (Home, About Us, Our Vision, NIOS Streams & Subjects, Admissions & Contact) remain accessible without login."
+        "On /admissions, the Contact Information card shows Address and Phone lines sourced from useContactContent() and does not hide them.",
+        "In the footer Contact section, Phone and Address are displayed alongside Email and match the same values shown on /admissions.",
+        "If phone is present, it is rendered as a clickable tel: link; if email is present, it is rendered as a clickable mailto: link.",
+        "No edits are made to files under frontend/src/components/ui or other immutable paths."
       ]
     },
     {
-      "id": "REQ-11",
-      "text": "Implement backend support for editable site content in the single Motoko actor (backend/main.mo), including read access for the public site and write access restricted to authorized admin principals.",
+      "id": "REQ-20",
+      "text": "Initialize a default \"contact\" page in backend content storage so phone/address/email are consistently available via getPage(\"contact\") without requiring an admin save first. Use the existing frontend defaults (address, phone, email) as the initial values stored for this page.",
       "target": "backend",
       "source": {
         "messageIds": [
-          "recent-messages"
+          "msg-1"
         ],
         "quotes": [
-          "yes i need admin page"
+          "add phone and address"
         ]
       },
       "acceptanceCriteria": [
-        "Backend exposes a query method to fetch the current site content model (publicly readable).",
-        "Backend exposes an update method to save changes to the site content model.",
-        "Unauthorized callers cannot update content (update call returns an error or rejects).",
-        "There is a way to establish/maintain at least one admin principal (e.g., initial admin set on first use and/or admin list management restricted to admins)."
-      ]
-    },
-    {
-      "id": "REQ-12",
-      "text": "Wire the public website pages to render selected text fields from the backend site content model (with sensible defaults matching current hardcoded copy), and ensure the Admin page can edit and persist those fields.",
-      "target": "both",
-      "source": {
-        "messageIds": [
-          "recent-messages"
-        ],
-        "quotes": [
-          "yes i need admin page"
-        ]
-      },
-      "acceptanceCriteria": [
-        "At minimum, the following become editable via /admin and are stored in the backend: Home page hero headline/subheadline, and the Admissions/Contact section contact details (address, phone, email) currently shown on the Admissions page and in the site footer.",
-        "After saving changes in /admin, refreshing the public pages shows the updated content.",
-        "If the backend has no saved content yet, the public pages display the existing current text (fallback defaults) without errors.",
-        "Saving shows a clear success or error state in the Admin UI."
-      ]
-    },
-    {
-      "id": "REQ-13",
-      "text": "Add an Admin navigation entry that is only visible when the user is authenticated (and optionally only when the user is an authorized admin), without changing existing navigation items or breaking mobile navigation.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "recent-messages"
-        ],
-        "quotes": [
-          "yes i need admin page"
-        ]
-      },
-      "acceptanceCriteria": [
-        "When logged out, the header does not show an Admin link.",
-        "When logged in, the header shows an Admin link that navigates to /admin.",
-        "Mobile menu behavior remains intact and the Admin link appears/does not appear consistently with desktop behavior."
+        "A fresh deployment returns a non-null PageContent for getPage(\"contact\").",
+        "The default stored contact page contains non-empty values for header (address), body (phone), and footer (email) matching the frontend default placeholders currently used.",
+        "Admin updates to pageId \"contact\" continue to persist and are reflected on the public site."
       ]
     }
   ],
   "constraints": [
-    "Do not edit files under frontend/src/components/ui (read-only UI component sources must be composed, not edited).",
-    "Do not edit frontend/src/hooks/useInternetIdentity.ts(x), frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
-    "Backend must remain a single Motoko actor in backend/main.mo; only add backend/migration.mo if a state migration is actually required."
+    "Backend must remain a single Motoko actor with all logic in backend/main.mo.",
+    "Do not modify files in frontend immutablePaths (including frontend/src/components/ui, frontend/src/hooks/useInternetIdentity.ts/tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx).",
+    "User-facing text must be in English."
   ],
   "nonGoals": [
-    "Building a full CMS with rich text editing, image uploads, or page builder functionality.",
-    "Supporting third-party authentication providers (only Internet Identity is allowed).",
-    "Adding real-time collaboration, chat, or WebSocket-based updates."
+    "Collecting or sending contact form submissions via email/SMS or any third-party messaging integration.",
+    "Adding maps, geolocation, or directions features.",
+    "Changing authentication/authorization behavior for the Admin page."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
-  },
-  "userProfileUpdate": {
-    "goalsToAdd": [],
-    "goalsToRemove": [],
-    "preferencesToAdd": [],
-    "preferencesToRemove": [],
-    "miscToAdd": [],
-    "miscToRemove": [],
-    "fieldsToSet": {},
-    "fieldsToDelete": []
   }
 }

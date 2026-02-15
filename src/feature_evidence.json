@@ -2,36 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-new-protected-admin-page-at-route-admin-that-provides-an-in-website-editing-panel-for-mastermind-study-circle-content-using-internet-identity-login-for-access",
-      "featureTitle": "Create a new protected Admin page at route \"/admin\" that provides an in-website editing panel for Mastermind Study Circle content, using Internet Identity login for access.",
+      "featureId": "feature-ensure-the-website-prominently-displays-the-institute-phone-number-and-physical-address-in-addition-to-email-in-public-facing-contact-areas-using-the-existing-editable-contact-content-pageid-contact-specifically-the-admissions-contact-page-contact-card-and-the-global-footer-must-show-phone-and-address-values-not-omit-them-and-render-phone-email-as-clickable-links-tel-mailto-when-non-empty",
+      "featureTitle": "Ensure the website prominently displays the institute phone number and physical address (in addition to email) in public-facing contact areas using the existing editable contact content (pageId: \"contact\"). Specifically, the Admissions & Contact page contact card and the global footer must show phone and address values (not omit them) and render phone/email as clickable links (tel: / mailto:) when non-empty.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/components/Admin/AdminAccessGate.tsx",
-        "frontend/src/pages/AdminPage.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-10"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-wire-the-public-website-pages-to-render-selected-text-fields-from-the-backend-site-content-model-with-sensible-defaults-matching-current-hardcoded-copy-and-ensure-the-admin-page-can-edit-and-persist-those-fields",
-      "featureTitle": "Wire the public website pages to render selected text fields from the backend site content model (with sensible defaults matching current hardcoded copy), and ensure the Admin page can edit and persist those fields.",
-      "files": [
-        "frontend/src/components/Admin/contentDefaults.ts",
         "frontend/src/components/layout/SiteFooter.tsx",
-        "frontend/src/hooks/useSiteContent.ts",
-        "frontend/src/pages/AdminPage.tsx",
-        "frontend/src/pages/AdmissionsCoachingPage.tsx",
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/src/pages/AdmissionsCoachingPage.tsx"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -42,27 +17,7 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-12"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-add-an-admin-navigation-entry-that-is-only-visible-when-the-user-is-authenticated-and-optionally-only-when-the-user-is-an-authorized-admin-without-changing-existing-navigation-items-or-breaking-mobile-navigation",
-      "featureTitle": "Add an Admin navigation entry that is only visible when the user is authenticated (and optionally only when the user is an authorized admin), without changing existing navigation items or breaking mobile navigation.",
-      "files": [
-        "frontend/src/components/layout/SiteHeader.tsx",
-        "frontend/src/hooks/useAuthz.ts"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0",
-        "authorization@4.0.0"
-      ],
-      "testIds": [
-        "REQ-13"
+        "REQ-19"
       ],
       "confidence": "high"
     }

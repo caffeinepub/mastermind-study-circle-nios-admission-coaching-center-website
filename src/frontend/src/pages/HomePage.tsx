@@ -19,10 +19,10 @@ export default function HomePage() {
                 NIOS Admission & Coaching Center
               </div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                {headline.includes('Educational Success') ? (
+                {headline.includes('Gateway to Knowledge') ? (
                   <>
-                    Your Path to{' '}
-                    <span className="text-primary">Educational Success</span>
+                    Your Gateway to{' '}
+                    <span className="text-primary">Knowledge</span>
                   </>
                 ) : (
                   headline

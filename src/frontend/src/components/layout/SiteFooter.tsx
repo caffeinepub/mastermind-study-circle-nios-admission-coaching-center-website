@@ -32,8 +32,36 @@ export default function SiteFooter() {
           <div>
             <h3 className="mb-3 text-lg font-semibold">Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Email: {email}</li>
-              <li>Phone: {phone}</li>
+              <li>
+                {email && !email.includes('[') && email.includes('@') ? (
+                  <>
+                    Email:{' '}
+                    <a 
+                      href={`mailto:${email}`}
+                      className="text-primary hover:underline"
+                    >
+                      {email}
+                    </a>
+                  </>
+                ) : (
+                  <>Email: {email}</>
+                )}
+              </li>
+              <li>
+                {phone && !phone.includes('[') && !phone.includes('XXX') ? (
+                  <>
+                    Phone:{' '}
+                    <a 
+                      href={`tel:${phone.replace(/\s/g, '')}`}
+                      className="text-primary hover:underline"
+                    >
+                      {phone}
+                    </a>
+                  </>
+                ) : (
+                  <>Phone: {phone}</>
+                )}
+              </li>
               <li>Address: {address}</li>
             </ul>
           </div>

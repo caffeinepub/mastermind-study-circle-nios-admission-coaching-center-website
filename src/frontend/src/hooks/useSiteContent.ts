@@ -3,6 +3,10 @@ import { useActor } from './useActor';
 import type { PageContent } from '../backend';
 import { contentDefaults } from '../components/Admin/contentDefaults';
 
+// Legacy values to detect and replace
+const LEGACY_HEADER = 'Home Page';
+const LEGACY_BODY = 'Where ideas become reality. Explore cutting-edge technology and innovation.';
+
 export function useGetHomePage() {
   const { actor, isFetching: actorFetching } = useActor();
 
@@ -50,9 +54,21 @@ export function useUpdatePage() {
 export function useHomePageContent() {
   const { data: homePage, isLoading } = useGetHomePage();
 
+  // Normalize legacy values: if the stored content exactly matches the old legacy text,
+  // replace it with the new education/vision-focused defaults
+  const normalizedHeadline = 
+    homePage?.header === LEGACY_HEADER 
+      ? contentDefaults.homeHeroHeadline 
+      : (homePage?.header || contentDefaults.homeHeroHeadline);
+
+  const normalizedSubheadline = 
+    homePage?.body === LEGACY_BODY 
+      ? contentDefaults.homeHeroSubheadline 
+      : (homePage?.body || contentDefaults.homeHeroSubheadline);
+
   return {
-    headline: homePage?.header || contentDefaults.homeHeroHeadline,
-    subheadline: homePage?.body || contentDefaults.homeHeroSubheadline,
+    headline: normalizedHeadline,
+    subheadline: normalizedSubheadline,
     isLoading,
   };
 }

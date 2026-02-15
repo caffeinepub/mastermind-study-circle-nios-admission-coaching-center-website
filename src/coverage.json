@@ -1,98 +1,46 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T13:41:05.599Z",
+  "generatedAt": "2026-02-15T14:31:02.458Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 4,
-    "implemented": 3,
+    "total": 2,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-10",
-        "summary": "Create a new protected Admin page at route \"/admin\" that provides an in-website editing panel for Mastermind Study Circle content, using Internet Identity login for access.",
+        "id": "REQ-19",
+        "summary": "Ensure the website prominently displays the institute phone number and physical address (in addition to email) in public-facing contact areas using the existing editable contact content (pageId: \"contact\"). Specifically, the Admissions & Contact page contact card and the global footer must show phone and address values (not omit them) and render phone/email as clickable links (tel: / mailto:) when non-empty.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/AdminPage.tsx",
-          "frontend/src/App.tsx",
-          "frontend/src/components/Admin/AdminAccessGate.tsx"
+          "frontend/src/pages/AdmissionsCoachingPage.tsx",
+          "frontend/src/components/layout/SiteFooter.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/AdminPage.tsx",
-          "frontend/src/App.tsx",
-          "frontend/src/components/Admin/AdminAccessGate.tsx"
+          "frontend/src/pages/AdmissionsCoachingPage.tsx",
+          "frontend/src/components/layout/SiteFooter.tsx"
         ]
       },
       {
-        "id": "REQ-11",
-        "summary": "Implement backend support for editable site content in the single Motoko actor (backend/main.mo), including read access for the public site and write access restricted to authorized admin principals.",
+        "id": "REQ-20",
+        "summary": "Initialize a default \"contact\" page in backend content storage so phone/address/email are consistently available via getPage(\"contact\") without requiring an admin save first. Use the existing frontend defaults (address, phone, email) as the initial values stored for this page.",
         "status": "unknown",
         "plannedFiles": [],
         "matchedFiles": []
-      },
-      {
-        "id": "REQ-12",
-        "summary": "Wire the public website pages to render selected text fields from the backend site content model (with sensible defaults matching current hardcoded copy), and ensure the Admin page can edit and persist those fields.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/hooks/useSiteContent.ts",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AdmissionsCoachingPage.tsx",
-          "frontend/src/components/layout/SiteFooter.tsx",
-          "frontend/src/pages/AdminPage.tsx",
-          "frontend/src/components/Admin/contentDefaults.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/hooks/useSiteContent.ts",
-          "frontend/src/pages/HomePage.tsx",
-          "frontend/src/pages/AdmissionsCoachingPage.tsx",
-          "frontend/src/components/layout/SiteFooter.tsx",
-          "frontend/src/pages/AdminPage.tsx",
-          "frontend/src/components/Admin/contentDefaults.ts"
-        ]
-      },
-      {
-        "id": "REQ-13",
-        "summary": "Add an Admin navigation entry that is only visible when the user is authenticated (and optionally only when the user is an authorized admin), without changing existing navigation items or breaking mobile navigation.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/layout/SiteHeader.tsx",
-          "frontend/src/hooks/useAuthz.ts"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/layout/SiteHeader.tsx",
-          "frontend/src/hooks/useAuthz.ts"
-        ]
       }
     ]
   },
   "changedFiles": [
-    "backend/authorization/MixinAuthorization.mo",
-    "backend/authorization/access-control.mo",
     "backend/main.mo",
+    "backend/migration.mo",
     "build-request.json",
-    "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/backend.d.ts",
-    "frontend/src/backend.ts",
-    "frontend/src/components/Admin/AdminAccessGate.tsx",
-    "frontend/src/components/Admin/contentDefaults.ts",
     "frontend/src/components/layout/SiteFooter.tsx",
-    "frontend/src/components/layout/SiteHeader.tsx",
-    "frontend/src/declarations/backend.did.d.ts",
-    "frontend/src/declarations/backend.did.js",
-    "frontend/src/hooks/useActor.ts",
-    "frontend/src/hooks/useAuthz.ts",
-    "frontend/src/hooks/useSiteContent.ts",
-    "frontend/src/pages/AdminPage.tsx",
     "frontend/src/pages/AdmissionsCoachingPage.tsx",
-    "frontend/src/pages/HomePage.tsx",
-    "frontend/src/utils/urlParams.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
