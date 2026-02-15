@@ -1,2 +1,3 @@
-# mastermind-study-circle-nios-admission-coaching-center-website
-Exported from Caffeine project: Mastermind Study Circle (NIOS Admission &amp; Coaching Center Website)
+## 
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`

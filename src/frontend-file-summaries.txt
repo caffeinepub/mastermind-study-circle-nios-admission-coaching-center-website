@@ -1,0 +1,20 @@
+{
+  "frontend/src/App.tsx": "Main application component that sets up TanStack Router with six routes (Home, About, Vision, NIOS Streams, Admissions, Admin) wrapped in a shared SiteLayout component.",
+  "frontend/src/components/layout/SiteLayout.tsx": "Root layout component that composes the site header, main content area with router outlet, and footer to provide consistent structure across all pages.",
+  "frontend/src/components/layout/SiteHeader.tsx": "Responsive navigation header with logo, desktop/mobile menus, and conditional Admin link that appears only for authenticated admin users.",
+  "frontend/src/components/layout/SiteFooter.tsx": "Site footer displaying institute information, quick links, and contact details fetched from backend with fallback defaults, plus required caffeine.ai attribution.",
+  "frontend/src/pages/HomePage.tsx": "Homepage featuring hero section with backend-editable headline/subheadline, vision preview, key features cards, and call-to-action sections.",
+  "frontend/src/pages/AboutPage.tsx": "About page describing the institute's mission, approach, and commitment, now branded as \"Mastermind Study Circle\" with NIOS program context preserved.",
+  "frontend/src/pages/VisionPage.tsx": "Vision page with motivational content addressing failure and setbacks, explaining how NIOS provides second chances, now referencing \"Mastermind Study Circle\" as the institute name.",
+  "frontend/src/pages/NiosStreamsSubjectsPage.tsx": "Comprehensive page displaying NIOS streams (Science, Commerce, Humanities) and subjects using accordion components, with visible source attribution to nios.ac.in.",
+  "frontend/src/pages/AdmissionsCoachingPage.tsx": "Admissions and coaching services page with detailed offerings, admission process steps, backend-editable contact information, and functional contact form.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for React Query hooks to interact with backend (currently minimal as backend has no methods).",
+  "frontend/src/index.css": "Global styles with professional blue and grey OKLCH color system for both light and dark modes, replacing the previous warm amber/terracotta palette.",
+  "frontend/tailwind.config.js": "Tailwind configuration extending the theme with Inter font family and custom design tokens matching the warm educational color palette.",
+  "frontend/index.html": "HTML entry point with updated document title referencing \"Mastermind Study Circle - NIOS Admission & Coaching Center\".",
+  "frontend/src/hooks/useAuthz.ts": "Custom hook that provides authentication and authorization state by combining Internet Identity authentication with backend admin role checking via React Query.",
+  "frontend/src/hooks/useSiteContent.ts": "React Query hooks for fetching and updating site content (home page and contact information) from the backend with fallback defaults when content is not yet saved.",
+  "frontend/src/components/Admin/contentDefaults.ts": "Centralized fallback defaults for editable site content (home hero headline/subheadline and contact details) used across public pages and admin forms.",
+  "frontend/src/components/Admin/AdminAccessGate.tsx": "Access control wrapper component that shows login prompt for unauthenticated users, access denied for non-admins, and renders admin content only for authenticated admin users.",
+  "frontend/src/pages/AdminPage.tsx": "Admin page with Internet Identity-protected access that provides editable forms for home page hero content and contact information with save functionality and status feedback."
+}

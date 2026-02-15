@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Website project for the institute “Mastermind Study Circle” (admission & coaching center) for NIOS, requiring at least five pages and informational content about vision, coping with failure, NIOS support, and NIOS streams/subjects (sourced from nios.ac.in). Visual theme to use blue and grey. Add an in-website admin page for editing site content.",
+  "architectural_notes": [
+    "Site content for NIOS streams/subjects should be sourced from nios.ac.in.",
+    "Institute name is “Mastermind Study Circle”.",
+    "Visual theme palette should use blue and grey (overrides prior preference to avoid blue/purple primaries).",
+    "User requires an admin page inside the website for editing content (not just edits via chat interface)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-responsive-institute-website-for-an-admission-and-coaching-center-for-nios-national-institute-of-open-schooling-with-a-top-navigation-bar-and-at-least-five-distinct-pages",
+      "title": "Create a responsive institute website for an admission and coaching center for NIOS (National Institute of Open Schooling) with a top navigation bar and at least five distinct pages.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-page-content-in-english-that-communicates-the-institute-s-vision-including-motivational-guidance-about-not-getting-depressed-by-failure-and-how-nios-can-help-learners-continue-their-education",
+      "title": "Add page content in English that communicates the institute’s vision, including motivational guidance about not getting depressed by failure and how NIOS can help learners continue their education.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-nios-streams-subjects-page-that-summarizes-streams-and-subject-options-using-information-sourced-from-https-nios-ac-in-include-a-visible-source-nios-ac-in-reference-on-the-page",
+      "title": "Create a “NIOS Streams & Subjects” page that summarizes streams and subject options using information sourced from https://nios.ac.in (include a visible “Source: nios.ac.in” reference on the page).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-clear-admissions-oriented-page-that-explains-the-institute-s-offerings-admission-guidance-coaching-support-and-provides-a-contact-section-address-placeholder-phone-placeholder-email-placeholder-and-a-simple-contact-form-ui",
+      "title": "Implement a clear admissions-oriented page that explains the institute’s offerings (admission guidance + coaching support) and provides a contact section (address placeholder, phone placeholder, email placeholder, and a simple contact form UI).",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-one-coherent-distinctive-visual-theme-colors-typography-spacing-and-ui-patterns-and-apply-it-consistently-across-all-pages-avoid-a-blue-purple-primary-palette",
+      "title": "Add one coherent, distinctive visual theme (colors, typography, spacing, and UI patterns) and apply it consistently across all pages; avoid a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-images-logo-simple-hero-illustrations-and-render-them-from-frontend-public-assets-generated-no-backend-image-routing",
+      "title": "Add generated static images (logo + simple hero/illustrations) and render them from frontend/public/assets/generated (no backend image routing).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-all-user-facing-institute-branding-text-to-use-the-institute-name-mastermind-study-circle-replacing-nios-excellence-while-keeping-nios-related-references-where-they-describe-the-program-nios-update-header-footer-and-page-hero-headings-ctas-so-the-displayed-institute-name-is-consistent-across-the-site",
+      "title": "Update all user-facing institute branding text to use the institute name “Mastermind Study Circle” (replacing “NIOS Excellence”) while keeping NIOS-related references where they describe the program (NIOS). Update header, footer, and page hero headings/CTAs so the displayed institute name is consistent across the site.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-change-the-global-visual-theme-to-a-blue-and-grey-palette-including-primary-accent-muted-border-and-ring-colors-and-apply-it-consistently-across-all-pages-and-components-that-rely-on-the-theme-tokens",
+      "title": "Change the global visual theme to a blue-and-grey palette (including primary, accent, muted, border, and ring colors) and apply it consistently across all pages and components that rely on the theme tokens.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-header-logo-alt-text-to-reflect-the-institute-name-mastermind-study-circle-and-ensure-any-institute-name-related-metadata-labels-in-shared-layout-elements-match-the-new-branding",
+      "title": "Update the header logo alt text to reflect the institute name “Mastermind Study Circle” and ensure any institute-name-related metadata/labels in shared layout elements match the new branding.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-protected-admin-page-at-route-admin-that-provides-an-in-website-editing-panel-for-mastermind-study-circle-content-using-internet-identity-login-for-access",
+      "title": "Create a new protected Admin page at route \"/admin\" that provides an in-website editing panel for Mastermind Study Circle content, using Internet Identity login for access.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-wire-the-public-website-pages-to-render-selected-text-fields-from-the-backend-site-content-model-with-sensible-defaults-matching-current-hardcoded-copy-and-ensure-the-admin-page-can-edit-and-persist-those-fields",
+      "title": "Wire the public website pages to render selected text fields from the backend site content model (with sensible defaults matching current hardcoded copy), and ensure the Admin page can edit and persist those fields.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-admin-navigation-entry-that-is-only-visible-when-the-user-is-authenticated-and-optionally-only-when-the-user-is-an-authorized-admin-without-changing-existing-navigation-items-or-breaking-mobile-navigation",
+      "title": "Add an Admin navigation entry that is only visible when the user is authenticated (and optionally only when the user is an authorized admin), without changing existing navigation items or breaking mobile navigation.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create an institute website (NIOS admission & coaching center) with at least five pages including vision/motivation content and NIOS streams/subjects info sourced from nios.ac.in.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add an in-website admin page/panel so the institute can edit website content (basic CMS-style editing) after the site goes live.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Implement backend support for editable site content in the single Motoko actor (backend/main.mo), including read access for the public site and write access restricted to authorized admin principals.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Mastermind Study Circle (NIOS Admission & Coaching Center Website)",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

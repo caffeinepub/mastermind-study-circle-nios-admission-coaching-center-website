@@ -1,0 +1,97 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "In-website Admin page for editable public site content (Internet Identity)",
+  "requirements": [
+    {
+      "id": "REQ-10",
+      "summary": "Add a protected /admin page that prompts for Internet Identity login and shows an in-website editing panel once authenticated.",
+      "acceptanceCriteria": [
+        "Navigating to /admin shows an Admin screen.",
+        "If the visitor is not authenticated with Internet Identity, the page shows a clear prompt/button to log in.",
+        "After successful login, the Admin screen is accessible and shows editing controls (not just a blank page).",
+        "The existing public pages (Home, About Us, Our Vision, NIOS Streams & Subjects, Admissions & Contact) remain accessible without login."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminPage.tsx",
+          "operation": "create",
+          "description": "Create the Admin page UI for route \"/admin\". Use the existing Internet Identity hook to detect authentication and show a clear login prompt/button when logged out; when logged in, render the editing panel UI. Use shadcn-ui form building blocks (e.g., Card, Button, Input, Textarea, Label) to present non-empty editing controls. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register the new \"/admin\" route and wire it to the new AdminPage so it is navigable. Ensure no changes to existing public routes and that they remain accessible without login."
+        },
+        {
+          "path": "frontend/src/components/Admin/AdminAccessGate.tsx",
+          "operation": "create",
+          "description": "Add a small wrapper component to encapsulate admin-page access behavior (logged-out login prompt; logged-in content). Use this gate inside AdminPage to keep routing simple and consistent. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Fetch editable site content from the backend for public rendering with safe fallbacks, and allow the Admin page to edit and persist key fields (home hero + contact details).",
+      "acceptanceCriteria": [
+        "At minimum, the following become editable via /admin and are stored in the backend: Home page hero headline/subheadline, and the Admissions/Contact section contact details (address, phone, email) currently shown on the Admissions page and in the site footer.",
+        "After saving changes in /admin, refreshing the public pages shows the updated content.",
+        "If the backend has no saved content yet, the public pages display the existing current text (fallback defaults) without errors.",
+        "Saving shows a clear success or error state in the Admin UI."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSiteContent.ts",
+          "operation": "create",
+          "description": "Add React Query hooks that use the existing actor (useActor) to read and write site content via available backend capabilities (e.g., getPage/getHomePage/updatePage). Include helpers to return sensible fallback defaults that match the current hardcoded copy when backend content is missing. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Wire the Home hero headline/subheadline to render from backend-provided content (via the new site content hooks) with a fallback to the current hardcoded headline/subheadline if no saved content exists. Keep the rest of the page intact and ensure no runtime errors when content is unavailable."
+        },
+        {
+          "path": "frontend/src/pages/AdmissionsCoachingPage.tsx",
+          "operation": "modify",
+          "description": "Wire the Admissions/Contact contact details (address, phone, email) to render from backend-provided content (via the new site content hooks) with fallbacks to the current hardcoded placeholders. Ensure the contact form behavior remains unchanged."
+        },
+        {
+          "path": "frontend/src/components/layout/SiteFooter.tsx",
+          "operation": "modify",
+          "description": "Wire the footer contact details (address, phone, email) to render from the same backend-provided contact content as the Admissions page, with fallbacks matching the current hardcoded footer values when no saved content exists."
+        },
+        {
+          "path": "frontend/src/pages/AdminPage.tsx",
+          "operation": "modify",
+          "description": "Add editable fields for: Home hero headline, Home hero subheadline, Contact address, Contact phone, Contact email. Load current values from backend (or fallback defaults) and allow saving via backend update calls using the site content hooks. Show clear success and error UI states using shadcn-ui components (e.g., alert-like messaging within Card, disabled Save button during save). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/Admin/contentDefaults.ts",
+          "operation": "create",
+          "description": "Centralize the fallback defaults that match the current hardcoded copy for the editable fields (home hero headline/subheadline and contact details) so public pages and Admin form share the same defaults."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Add an Admin nav entry that appears only for authenticated users (optionally only admins) without breaking existing desktop/mobile navigation.",
+      "acceptanceCriteria": [
+        "When logged out, the header does not show an Admin link.",
+        "When logged in, the header shows an Admin link that navigates to /admin.",
+        "Mobile menu behavior remains intact and the Admin link appears/does not appear consistently with desktop behavior."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/layout/SiteHeader.tsx",
+          "operation": "modify",
+          "description": "Conditionally add an \"Admin\" navigation item (to \"/admin\") that is only visible when the user is authenticated via Internet Identity (and optionally only when authorized as admin by calling the backend role check capability via the actor). Ensure both desktop and mobile menus apply the same condition and existing navigation items remain unchanged. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAuthz.ts",
+          "operation": "create",
+          "description": "Add a small helper hook to derive auth state for navigation (e.g., isAuthenticated from useInternetIdentity and optional isAdmin by querying actor.isCallerAdmin()). Cache with React Query to avoid repeated calls and handle authorization failures gracefully. Verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}
